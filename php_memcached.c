@@ -1275,7 +1275,7 @@ static PHP_METHOD(Memcached, __construct)
 		le.type = php_memc_list_entry();
 		le.ptr  = intern->memc;
 
-		GC_REFCOUNT(&le) = 1;
+		GC_SET_REFCOUNT(&le, 1)
 
 		/* plist_key is not a persistent allocated key, thus we use str_update here */
 		if (zend_hash_str_update_mem(&EG(persistent_list), ZSTR_VAL(plist_key), ZSTR_LEN(plist_key), &le, sizeof(le)) == NULL) {
